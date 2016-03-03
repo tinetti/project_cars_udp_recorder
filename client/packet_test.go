@@ -6,6 +6,12 @@ import (
 	"testing"
 )
 
+func compare(t *testing.T, name string, actual interface{}, expected interface{}) {
+	if actual != expected {
+		t.Error(fmt.Sprintf("%v: actual %T(%v) != expected %T(%v)", name, actual, actual, expected, expected))
+	}
+}
+
 func TestParse(t *testing.T) {
 	const filename = "sample_data/2016-03-02T19:02:33-06:00"
 
@@ -18,6 +24,9 @@ func TestParse(t *testing.T) {
 	if err != nil {
 		t.Error("parse error", err)
 	}
+
+	p := packet
+	compare(t, "BuildVersionNumber", p.BuildVersionNumber, uint16(1182))
 
 	var fmtTests = []struct {
 		name     string
@@ -336,6 +345,17 @@ func TestParse(t *testing.T) {
 		{"ExtentsCentreZ", func(p Packet) interface{} {
 			return p.ExtentsCentreZ
 		}, float32(-0.112976015)},
+
+		{"Tyres[0].TyreFlags", func(p Packet) interface{} {
+			return p.Tyres[0].TyreFlags
+		}, uint8(TyreFlags_ATTACHED + TyreFlags_INFLATED + TyreFlags_IS_ON_GROUND)},
+
+		/*
+
+        self.assertAlmostEqual(-0.016962986439466476, p.tyres[1]["tyreRPS"])  # Hmm, we're stopped in the test data!
+        self.assertEqual(42, p.tyres[2]["brakeTempCelsius"])
+        self.assertAlmostEqual(0.0, p.tyres[3]["rideHeight"], 8)
+		 */
 	}
 
 	for _, tt := range fmtTests {
