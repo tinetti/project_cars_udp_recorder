@@ -43,7 +43,7 @@ func TestParse(t *testing.T) {
 			return p.NumParticipants
 		}, int8(16)},
 	}
-	
+
 	for _, tt := range fmtTests {
 		actual := tt.getter(packet)
 
