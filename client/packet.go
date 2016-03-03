@@ -12,15 +12,12 @@ type Packet struct {
 	RawSessionState            uint8
 	ViewedParticipantIndex     int8
 	NumParticipants            int8
-	// Unfiltered input
 	UnfilteredThrottle         uint8
 	UnfilteredBrake            uint8
 	UnfilteredSteering         int8
 	UnfilteredClutch           uint8
-	// ?
 	RaceStateFlags             uint8
 	LapsInEvent                uint8
-	// Timing info
 	BestLapTime                float32
 	LastLapTime                float32
 	CurrentTime                float32
@@ -42,13 +39,9 @@ type Packet struct {
 	WorldFastestSector1Time    float32
 	WorldFastestSector2Time    float32
 	WorldFastestSector3Time    float32
-	// Joypad state?
 	JoyPad                     uint16
-	// Flags
 	HighestFlag                uint8
-	// Pit schedule
 	PitModeSchedule            uint8
-	// Car state
 	OilTempCelsius             int16
 	OilPressureKPa             uint16
 	WaterTempCelsius           int16
@@ -68,7 +61,6 @@ type Packet struct {
 	BoostAmount                uint8
 	EnforcedPitStopLap         int8
 	CrashState                 uint8
-	// Motion and device
 	OdometerKM                 float32
 	OrientationX               float32
 	OrientationY               float32
@@ -91,14 +83,14 @@ type Packet struct {
 	ExtentsCentreX             float32
 	ExtentsCentreY             float32
 	ExtentsCentreZ             float32
+}
 
+func (p Packet) GetSequenceNumber() uint8 {
+	return (p.RawSequencePacket & 0xFC) >> 2
+}
 
-	//	CarName            [64]char
-	//	CarClassName       char[64]
-	//char        sTrackLocation[64];        // 131
-	//char        sTrackVariation[64]; // 195
-	//char        sName[16][64]; // 259
-	//f32        sFastestLapTime[16]; // 1283
+func (p Packet) GetPacketType() uint8 {
+	return p.RawSequencePacket & 0x3
 }
 
 type GameState uint8
