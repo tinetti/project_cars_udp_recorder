@@ -82,28 +82,28 @@ type Packet struct {
 	ExtentsCentreX             float32
 	ExtentsCentreY             float32
 	ExtentsCentreZ             float32
-	Tyres                      [4]Tyre
+	Tires                      [4]Tire
 }
 
-type Tyre struct {
-	TyreFlags             uint8
+type Tire struct {
+	TireFlags             uint8
 	Terrain               uint8
-	TyreY                 float32
-	TyreRPS               float32
-	TyreSlipSpeed         float32
-	TyreTemp              uint8
-	TyreGrip              uint8
-	TyreHeightAboveGround float32
-	TyreLateralStiffness  float32
-	TyreWear              uint8
+	TireY                 float32
+	TireRPS               float32
+	TireSlipSpeed         float32
+	TireTemp              uint8
+	TireGrip              uint8
+	TireHeightAboveGround float32
+	TireLateralStiffness  float32
+	TireWear              uint8
 	BrakeDamage           uint8
 	SuspensionDamage      uint8
 	BrakeTempCelsius      int16
-	TyreTreadTemp         uint16
-	TyreLayerTemp         uint16
-	TyreCarcassTemp       uint16
-	TyreRimTemp           uint16
-	TyreInternalAirTemp   uint16
+	TireTreadTemp         uint16
+	TireLayerTemp         uint16
+	TireCarcassTemp       uint16
+	TireRimTemp           uint16
+	TireInternalAirTemp   uint16
 	WheelLocalPositionY   float32
 	RideHeight            float32
 	SuspensionTravel      float32
@@ -228,17 +228,17 @@ const (
 )
 
 const (
-	Tyres_FRONT_LEFT = iota
-	Tyres_FRONT_RIGHT = iota
-	Tyres_REAR_LEFT = iota
-	Tyres_REAR_RIGHT = iota
+	Tires_FRONT_LEFT = iota
+	Tires_FRONT_RIGHT = iota
+	Tires_REAR_LEFT = iota
+	Tires_REAR_RIGHT = iota
 )
 
 const (
-	TyreFlags_NONE = 0
-	TyreFlags_ATTACHED = 1
-	TyreFlags_INFLATED = 2
-	TyreFlags_IS_ON_GROUND = 4
+	TireFlags_NONE = 0
+	TireFlags_ATTACHED = 1
+	TireFlags_INFLATED = 2
+	TireFlags_IS_ON_GROUND = 4
 )
 
 const (
@@ -254,7 +254,7 @@ const (
 	Terrain_TERRAIN_BUMPY_GRAVEL = iota
 	Terrain_TERRAIN_RUMBLE_STRIPS = iota
 	Terrain_TERRAIN_DRAINS = iota
-	Terrain_TERRAIN_TYREWALLS = iota
+	Terrain_TERRAIN_TireWALLS = iota
 	Terrain_TERRAIN_CEMENTWALLS = iota
 	Terrain_TERRAIN_GUARDRAILS = iota
 	Terrain_TERRAIN_SAND = iota
