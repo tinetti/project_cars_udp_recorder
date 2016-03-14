@@ -16,6 +16,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
+
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
@@ -61,6 +62,8 @@ app.use(function (req, res, next) {
 });
 
 app.get('/api/packets', function (req, res) {
+    var params = req.query;
+    console.log("query params: " + JSON.stringify(params));
     var query = 'SELECT id, txt, val FROM examples.basic';
     client.execute(query, [], {prepare: true}, function (err, result) {
         if (err) {
